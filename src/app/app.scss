@@ -1,0 +1,52 @@
+/* ========================================
+   Modern App Root Styles
+   ======================================== */
+
+/* Container */
+.-cmp-main-content {
+  min-height: 100vh;
+  background: #f8fafc;
+}
+
+/* Header */
+header {
+  background: #ffffff;
+  border-bottom: 1px solid #e2e8f0;
+  padding: 1.5rem 1rem;
+}
+
+.-cmp-title {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.angular-logo {
+  width: 200px;
+  height: auto;
+  margin: 0 auto 1rem;
+  display: block;
+}
+
+.-cmp-title h1 {
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: #2d3748;
+  margin: 0;
+}
+
+/* Navigation */
+nav {
+  display: flex;
+  justify-content: center;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .angular-logo {
+    width: 150px;
+  }
+
+  .-cmp-title h1 {
+    font-size: 1.5rem;
+  }
+}

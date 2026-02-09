@@ -1,0 +1,142 @@
+/* Profile Form - Soft Color Palette */
+
+._main-form {
+  border: none;
+  padding: 2rem;
+  margin: 0;
+}
+
+._info-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+._info-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+
+._info-form b {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+._info-form input,
+._info-form textarea {
+  padding: 0.625rem 0.875rem;
+  font-size: 0.9375rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.5rem;
+  background: #ffffff;
+  color: #334155;
+  font-family: inherit;
+  transition: all 0.2s ease;
+}
+
+._info-form input:hover,
+._info-form textarea:hover {
+  border-color: #cbd5e0;
+}
+
+._info-form input:focus,
+._info-form textarea:focus {
+  outline: none;
+  border-color: #94a3b8;
+  box-shadow: 0 0 0 3px rgba(148, 163, 184, 0.1);
+}
+
+._info-form textarea {
+  resize: vertical;
+  line-height: 1.6;
+}
+
+/* Friends Form */
+._friends-form {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.75rem;
+  padding: 1.25rem;
+  margin: 0;
+}
+
+._friends-form legend {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+._friend-container {
+  display: flex;
+  gap: 0.5rem;
+  align-items: flex-end;
+  margin-top: 0.875rem;
+  padding: 0.875rem;
+  background: #ffffff;
+  border-radius: 0.5rem;
+  border: 1px solid #e2e8f0;
+}
+
+._friend-input {
+  flex: 1;
+}
+
+._friend-input label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+
+._friend-input b {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #64748b;
+}
+
+._friend-title-no {
+  font-weight: 400;
+  margin-left: 0.25rem;
+}
+
+._friend-input input {
+  padding: 0.5rem 0.75rem;
+  font-size: 0.9375rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.375rem;
+  background: #ffffff;
+  color: #334155;
+  transition: all 0.2s ease;
+}
+
+._friend-input input:hover {
+  border-color: #cbd5e0;
+}
+
+._friend-input input:focus {
+  outline: none;
+  border-color: #94a3b8;
+  box-shadow: 0 0 0 3px rgba(148, 163, 184, 0.1);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  ._friend-container {
+    flex-wrap: wrap;
+  }
+
+  ._friend-input {
+    flex-basis: 100%;
+    order: -1;
+  }
+}

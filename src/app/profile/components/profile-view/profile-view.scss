@@ -1,0 +1,41 @@
+/* Profile View - Soft Color Palette */
+
+._main-data {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 1680px;
+}
+
+._main-data dt {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-top: 1rem;
+  margin-bottom: 0.375rem;
+}
+
+._main-data dt:first-child {
+  margin-top: 0;
+}
+
+._main-data dd {
+  font-size: 0.9375rem;
+  color: #334155;
+  margin: 0;
+  padding: 0.625rem 0.875rem;
+  background: #f8fafc;
+  border-radius: 0.375rem;
+  border: 1px solid #e2e8f0;
+}
+
+._main-data dd._autobiography {
+  white-space: pre-wrap;
+  line-height: 1.6;
+  min-height: 4rem;
+}

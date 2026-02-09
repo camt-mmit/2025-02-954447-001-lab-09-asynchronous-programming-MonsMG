@@ -1,0 +1,30 @@
+/* Profile Root - Soft Design */
+
+:host {
+  display: block;
+  min-height: 100vh;
+  background: #f8fafc;
+}
+
+nav {
+  background: #ffffff;
+  border-bottom: 1px solid #e2e8f0;
+  padding: 1rem;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+router-outlet {
+  display: block;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  router-outlet {
+    padding: 1.5rem 1rem;
+  }
+}
