@@ -19,112 +19,80 @@
     </div>
   </div>
 
-  @if (model().length === 0) {
-    <div class="empty-state">
-      <svg class="empty-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-        ></path>
-      </svg>
-      <h3 class="empty-title">No sections yet</h3>
-      <p class="empty-description">Click "Add Section" to create your first section</p>
-    </div>
-  } @else {
-    <div class="sections-container">
-      @for (section of model(); track section.id; let sectionIndex = $index) {
-        <article class="section-card">
-          <div class="section-card-header">
-            <div class="section-info">
-              <h2 class="section-title">Section {{ sectionIndex + 1 }}</h2>
-              <span class="section-count"
-                >{{ section.numbers.length }} {{ section.numbers.length === 1 ? 'number' : 'numbers' }}</span
-              >
+  @for (section of sectionsForm; track section; let secIndex = $index) {
+    <article class="section-card">
+      <div class="section-card-header">
+        <div class="section-info">
+          <h2 class="section-title">Section {{ secIndex + 1 }}</h2>
+        </div>
+        <div class="section-actions">
+          <button type="button" class="btn btn-secondary btn-sm"
+          (click)="addNumber(secIndex)"
+          >
+            <svg class="btn-icon-sm" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 4v16m8-8H4"
+              ></path>
+            </svg>
+            Add Number
+          </button>
+          <button
+            type="button"
+            class="btn btn-danger btn-sm"
+            [disabled]="$count === 1"
+            (click)="removeSection(secIndex)"
+          >
+            <svg class="btn-icon-sm" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+              ></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+      <div class="numbers-list">
+        @for (numberControl of section; track numberControl; let numIndex = $index) {
+          <div class="number-item">
+            <div class="input-wrapper">
+              <input
+                type="number"
+                class="number-input"
+                [formField]="numberControl"
+                placeholder="Enter number"
+              />
             </div>
-            <div class="section-actions">
-              <button
-                type="button"
-                class="btn btn-secondary btn-sm"
-                (click)="addNumber(sectionIndex)"
-              >
-                <svg class="btn-icon-sm" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M12 4v16m8-8H4"
-                  ></path>
-                </svg>
-                Add Number
-              </button>
-              <button
-                type="button"
-                class="btn btn-danger btn-sm"
-                [disabled]="!canRemoveSection()"
-                (click)="removeSection(sectionIndex)"
-              >
-                <svg class="btn-icon-sm" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
-                  ></path>
-                </svg>
-              </button>
-            </div>
+            <button
+              type="button"
+              class="btn btn-danger-ghost btn-icon-only"
+              [disabled]="$count === 1"
+              (click)="removeNumber(secIndex, numIndex)"
+              [title]="$count === 1 ? 'Cannot remove last number' : 'Remove number'"
+            >
+              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M6 18L18 6M6 6l12 12"
+                ></path>
+              </svg>
+            </button>
           </div>
+        }
+      </div>
 
-          @if (section.numbers.length === 0) {
-            <div class="section-empty">
-              <p>This section is empty. Add some numbers to get started.</p>
-            </div>
-          } @else {
-            <div class="numbers-list">
-              @for (number of section.numbers; track number.id; let numberIndex = $index) {
-                <div class="number-item">
-                  <div class="input-wrapper">
-                    <input
-                      type="number"
-                      class="number-input"
-                      [value]="number.value"
-                      (input)="updateNumber(sectionIndex, numberIndex, $any($event.target).value)"
-                      placeholder="Enter number"
-                    />
-                  </div>
-                  <button
-                    type="button"
-                    class="btn btn-danger-ghost btn-icon-only"
-                    [disabled]="!canRemoveNumber(sectionIndex)"
-                    (click)="removeNumber(sectionIndex, numberIndex)"
-                    [title]="
-                      canRemoveNumber(sectionIndex) ? 'Remove number' : 'Cannot remove last number'
-                    "
-                  >
-                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M6 18L18 6M6 6l12 12"
-                      ></path>
-                    </svg>
-                  </button>
-                </div>
-              }
-            </div>
-
-            <div class="section-footer">
-              <div class="sum-display">
-                <span class="sum-label">Result Total</span>
-                <span class="sum-value">{{ getSum(section.numbers) | number }}</span>
-              </div>
-            </div>
-          }
-        </article>
-      }
-    </div>
+      <div class="section-footer">
+        <div class="sum-display">
+          <span class="sum-label">Result Total</span>
+          <span class="sum-value">{{ sumResult()[secIndex] | number }}</span>
+        </div>
+      </div>
+    </article>
   }
 </div>

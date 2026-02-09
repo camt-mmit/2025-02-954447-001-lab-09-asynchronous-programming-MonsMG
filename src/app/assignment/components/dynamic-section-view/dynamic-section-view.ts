@@ -1,6 +1,7 @@
 import { Component, input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DynamicSection, DynamicSectionItem } from '../../types';
+import { DynamicSection } from '../../types';
+import { computed } from '@angular/core';
 
 @Component({
   selector: 'app-dynamic-section-view',
@@ -9,9 +10,7 @@ import { DynamicSection, DynamicSectionItem } from '../../types';
   styleUrl: './dynamic-section-view.scss',
 })
 export class DynamicSectionView {
-  readonly sections = input.required<DynamicSection>();
+  readonly data = input.required<DynamicSection>();
 
-  getResults(numbers: readonly DynamicSectionItem[]): number {
-    return numbers.reduce((sum, item) => sum + item.value, 0);
-  }
+  readonly sumResult = computed(() => this.data().map((section) => section.reduce((a, b) => a + b, 0)));
 }

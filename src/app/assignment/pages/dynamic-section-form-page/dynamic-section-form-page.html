@@ -1,4 +1,8 @@
 <div class="page-container">
   <h2>✏️ Dynamic Section Form</h2>
-  <app-dynamic-section-form />
+  @if (dataResource.hasValue()) {
+    <app-dynamic-section-form [(model)]="dataResource.value" />
+  } @else {
+    <p>Loading...</p>
+  }
 </div>
