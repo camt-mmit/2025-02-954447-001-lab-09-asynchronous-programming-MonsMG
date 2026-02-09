@@ -24,23 +24,23 @@
           <div class="section-card-header">
             <h2 class="section-title">Section {{ $index + 1 }}</h2>
             <span class="section-badge"
-              >{{ section.length }} {{ section.length === 1 ? 'item' : 'items' }}</span
+              >{{ section.numbers.length }} {{ section.numbers.length === 1 ? 'item' : 'items' }}</span
             >
           </div>
 
-          @if (section.length === 0) {
+          @if (section.numbers.length === 0) {
             <p class="section-empty">No numbers in this section</p>
           } @else {
             <div class="numbers-grid">
-              @for (number of section; track $index) {
-                <div class="number-chip">{{ number | number }}</div>
+              @for (number of section.numbers; track $index) {
+                <div class="number-chip">{{ number.value | number }}</div>
               }
             </div>
 
             <div class="section-footer">
               <div class="sum-display">
                 <span class="sum-label">Total Sum</span>
-                <span class="sum-value">{{ getResults(section) | number }}</span>
+                <span class="sum-value">{{ getResults(section.numbers) | number }}</span>
               </div>
             </div>
           }
