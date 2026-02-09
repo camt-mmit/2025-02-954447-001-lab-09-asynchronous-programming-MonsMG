@@ -1,4 +1,4 @@
-/* Modern Form Page - Soft Color Palette */
+/* Dynamic Section Form - Soft Color Palette (คล้าย Profile Form) */
 
 .form-page {
   max-width: 1000px;
@@ -21,17 +21,17 @@
 .page-title {
   font-size: 1.875rem;
   font-weight: 600;
-  color: #2d3748;
+  color: #334155;
   margin: 0 0 0.5rem 0;
 }
 
 .page-subtitle {
-  font-size: 0.95rem;
+  font-size: 0.9375rem;
   color: #64748b;
   margin: 0;
 }
 
-/* Buttons */
+/* Buttons - Soft Style */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -48,7 +48,7 @@
 
 .btn:focus {
   outline: none;
-  box-shadow: 0 0 0 3px rgba(148, 163, 184, 0.2);
+  box-shadow: 0 0 0 3px rgba(148, 163, 184, 0.1);
 }
 
 .btn:disabled {
@@ -56,28 +56,31 @@
   cursor: not-allowed;
 }
 
+/* Primary Button - Soft Gray-Blue */
 .btn-primary {
-  background: #64748b;
+  background: #94a3b8;
   color: white;
 }
 
 .btn-primary:hover:not(:disabled) {
-  background: #475569;
+  background: #64748b;
 }
 
+/* Secondary Button - Subtle */
 .btn-secondary {
-  background: #f1f5f9;
-  color: #475569;
+  background: #f8fafc;
+  color: #64748b;
   border: 1px solid #e2e8f0;
 }
 
 .btn-secondary:hover:not(:disabled) {
-  background: #e2e8f0;
+  background: #f1f5f9;
   border-color: #cbd5e0;
 }
 
+/* Danger Button - Soft Red */
 .btn-danger {
-  background: #f1f5f9;
+  background: #f8fafc;
   color: #dc2626;
   border: 1px solid #e2e8f0;
 }
@@ -87,6 +90,7 @@
   border-color: #fecaca;
 }
 
+/* Ghost Danger Button */
 .btn-danger-ghost {
   background: transparent;
   color: #dc2626;
@@ -98,6 +102,7 @@
   background: #fef2f2;
 }
 
+/* Button Sizes */
 .btn-sm {
   padding: 0.5rem 0.875rem;
   font-size: 0.875rem;
@@ -110,15 +115,24 @@
   justify-content: center;
 }
 
-.btn-icon {
+/* SVG Icons */
+.btn-icon,
+.btn svg {
+  width: 1.25rem;
+  height: 1.25rem;
+  flex-shrink: 0;
+}
+
+.btn-icon-sm,
+.btn-sm svg {
   width: 1.125rem;
   height: 1.125rem;
   flex-shrink: 0;
 }
 
-.btn-icon-sm {
-  width: 1rem;
-  height: 1rem;
+.btn-icon-only svg {
+  width: 1.25rem;
+  height: 1.25rem;
   flex-shrink: 0;
 }
 
@@ -158,7 +172,7 @@
   gap: 1.25rem;
 }
 
-/* Section Card */
+/* Section Card - Soft White */
 .section-card {
   background: #ffffff;
   border-radius: 0.75rem;
@@ -223,6 +237,7 @@
   flex: 1;
 }
 
+/* Number Input - Matching profile-form style */
 .number-input {
   width: 100%;
   max-width: 50rem;

@@ -1,16 +1,9 @@
 import { DecimalPipe } from '@angular/common';
-import { Component, model, ChangeDetectionStrategy } from '@angular/core';
-import {
-  FormField,
-  apply,
-  applyEach,
-  createManagedMetadataKey,
-  createMetadataKey,
-  form,
-  metadata,
-} from '@angular/forms/signals';
-import { Profile } from '../../types';
-import { createFriend } from '../../helpers';
+import { ChangeDetectionStrategy, Component, effect, linkedSignal, model } from '@angular/core';
+import { FormField, createMetadataKey, form, metadata } from '@angular/forms/signals';
+import { createFriend, toFriendModel, toProfile, toProfileModel } from '../../helpers';
+import { Profile, ProfileModel } from '../../types';
+
 @Component({
   selector: 'app-profile-form',
   imports: [FormField, DecimalPipe],
@@ -20,21 +13,35 @@ import { createFriend } from '../../helpers';
 })
 export class ProfileForm {
   readonly data = model.required<Profile>();
-  protected readonly friendsCountKey = createMetadataKey<number>();
-  protected readonly friendUcNameKey = createMetadataKey<string>();
 
-  protected readonly form = form(this.data, (path) => {
-    metadata(path.friends, this.friendsCountKey, ({ value }) => value().length);
+  private syncedSource: Profile | null = null;
 
-    applyEach(path.friends, (path) => {
-      metadata(path, this.friendUcNameKey, ({ value }) => {
-        return value()?.toUpperCase()??'';
-      });
-    });
+  protected readonly model = linkedSignal({
+    source: this.data,
+    computation: (source, previous): ProfileModel => {
+      if (typeof previous === 'undefined' || this.syncedSource !== source) {
+        return toProfileModel(source);
+      } else {
+        return previous.value;
+      }
+    },
   });
 
+  protected readonly friendsCountKey = createMetadataKey<number>();
+
+  protected readonly form = form(this.model, (path) => {
+    metadata(path.friends, this.friendsCountKey, ({ value }) => value().length);
+  });
+
+  constructor() {
+    effect(() => {
+      this.syncedSource = toProfile(this.model());
+      this.data.set(this.syncedSource);
+    });
+  }
+
   protected addFriend(): void {
-    this.form.friends().value.update((items) => [...items, createFriend()]);
+    this.form.friends().value.update((items) => [...items, toFriendModel(createFriend())]);
   }
 
   protected removeFriend(index: number): void {
